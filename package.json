@@ -2,8 +2,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "build": "npm run build:sanity && npm run build:web",
+    "start": "next start",
+    "build:web": "next build",
+    "build:sanity": "cd studio && sanity build ../public/studio -y && cd .."
   },
   "dependencies": {
     "next": "latest",
