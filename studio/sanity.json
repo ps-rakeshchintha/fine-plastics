@@ -1,7 +1,8 @@
 {
   "root": true,
   "project": {
-    "name": "Fine Plastics"
+    "name": "Fine Plastics",
+    "basePath": "/studio"
   },
   "api": {
     "projectId": "mfrp02w8",
