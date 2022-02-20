@@ -4,7 +4,7 @@ export default {
   title: 'Site configuration',
   // https://www.sanity.io/docs/experimental/ui-affordances-for-actions
   __experimental_actions: [/*"create", "delete", */ 'update', 'publish'],
-  fieldsets: [{ name: 'footer', title: 'Footer' }],
+  fieldsets: [{ name: 'footer', title: 'Footer' }, { name: 'header', title: 'Header' }],
   fields: [
     {
       name: 'title',
@@ -43,6 +43,7 @@ export default {
         Rule.max(5).warning('Are you sure you want more than 5 items?'),
         Rule.unique().error('You have duplicate menu items'),
       ],
+      fieldset: 'header',
       type: 'array',
       of: [
         {

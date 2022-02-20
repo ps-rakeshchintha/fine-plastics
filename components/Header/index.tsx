@@ -3,8 +3,12 @@ import { MoonIcon } from '@heroicons/react/solid'
 import Link from 'next/link'
 import { useState } from 'react'
 import Button from '../Button'
-import HeaderMenu from './HeaderMenu'
+import HeaderMenu, { MenuItem } from './HeaderMenu'
 import Logo from '../Logo'
+
+export interface HeaderProps {
+  menuItems: MenuItem[]
+}
 
 const CTA = () => {
   return (
@@ -19,7 +23,7 @@ const CTA = () => {
   )
 }
 
-const Header = () => {
+const Header = ({ menuItems }: HeaderProps) => {
   const [showMenu, setShowMenu] = useState(false)
   const toggleMenu = () => {
     setShowMenu(!showMenu)
@@ -31,16 +35,8 @@ const Header = () => {
           <div className="absolute left-2 top-2 lg:hidden">
             <button className="group m-4" onClick={toggleMenu}>
               <span className="flex h-6 w-6 flex-col place-items-center items-center justify-around py-1">
-                <span
-                  className={`inline-block h-[2px] w-5 bg-slate-400 transition-transform group-active:bg-pink-500 ${
-                    showMenu ? 'translate-y-1 rotate-45' : 'rotate-0'
-                  }`}
-                ></span>
-                <span
-                  className={`inline-block h-[2px] w-5 bg-slate-400 transition-transform group-active:bg-pink-500 ${
-                    showMenu ? '-translate-y-1 -rotate-45' : 'rotate-0'
-                  }`}
-                ></span>
+                <span className={`inline-block h-[2px] w-5 bg-slate-400 transition-transform group-active:bg-pink-500 ${showMenu ? 'translate-y-1 rotate-45' : 'rotate-0'}`}></span>
+                <span className={`inline-block h-[2px] w-5 bg-slate-400 transition-transform group-active:bg-pink-500 ${showMenu ? '-translate-y-1 -rotate-45' : 'rotate-0'}`}></span>
               </span>
               <span className="sr-only">Toggle Menu</span>
             </button>
@@ -54,7 +50,7 @@ const Header = () => {
             </Link>
           </div>
           <div className="hidden lg:block">
-            <HeaderMenu />
+            <HeaderMenu menuItems={menuItems} />
           </div>
           <div className="hidden gap-x-4 md:flex">
             <CTA />
@@ -70,7 +66,7 @@ const Header = () => {
           leaveTo="opacity-0"
           className="absolute left-0 w-full bg-white bg-opacity-95 py-6 px-4 drop-shadow backdrop-blur"
         >
-          <HeaderMenu />
+          <HeaderMenu menuItems={menuItems} />
           <div className="grid gap-3 md:hidden">
             <CTA />
           </div>

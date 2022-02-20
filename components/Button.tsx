@@ -33,15 +33,11 @@ const Button = (props: ButtonProps) => {
   }
   switch (variant) {
     case 'primary':
-      classNames =
-        classNames +
-        ' bg-pink-500 text-white hover:bg-pink-600 active:bg-pink-700'
+      classNames = classNames + ' bg-pink-500 text-white hover:bg-pink-600 active:bg-pink-700'
       break
 
     case 'light':
-      classNames =
-        classNames +
-        ' bg-slate-100 text-black hover:bg-slate-200 active:bg-slate-300'
+      classNames = classNames + ' bg-slate-100 text-black hover:bg-slate-200 active:bg-slate-300'
       break
 
     default:
@@ -49,16 +45,10 @@ const Button = (props: ButtonProps) => {
   }
   return props.href ? (
     <Link href={props.href}>
-      <a className={classNames + ' flex items-center justify-center'}>
-        {props.children}
-      </a>
+      <a className={classNames + ' flex items-center justify-center'}>{props.children}</a>
     </Link>
   ) : (
-    <button
-      disabled={disabled}
-      onClick={() => onClick()}
-      className={classNames}
-    >
+    <button disabled={disabled} onClick={() => onClick()} className={classNames}>
       {props.children}
     </button>
   )
