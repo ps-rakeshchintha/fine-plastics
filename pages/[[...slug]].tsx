@@ -24,6 +24,14 @@ const routesQuery = groq`
     "slug": slug.current
   }
 `
+const pageQuery = groq`
+  *[_type == "route" && slug.current == $slug][0]{
+    page-> {
+      title,
+      description
+    }
+  }
+`
 
 interface Route {
   slug: string;
@@ -42,16 +50,21 @@ export async function getStaticPaths() {
   return { paths, fallback: false }
 }
 
-export const getStaticProps: GetStaticProps = async (_context) => {
+export const getStaticProps: GetStaticProps = async (context) => {
   const siteConfig = await getClient().fetch(siteConfigQuery)
+  const slug = context.params?.slug ? (context.params?.slug as String[]).join("/") : "/";
+  const pageData = await getClient().fetch(pageQuery, {
+    slug
+  })
   return {
     props: {
       siteConfig,
+      pageData: pageData.page
     },
   }
 }
 
-const Home: NextPage = ({ siteConfig }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Home: NextPage = ({ siteConfig, pageData }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
       <Header menuItems={siteConfig.mainNavigation} logo={siteConfig.logo} />
@@ -60,6 +73,8 @@ const Home: NextPage = ({ siteConfig }: InferGetStaticPropsType<typeof getStatic
           <title>{siteConfig.title}</title>
         </Head>
         <main className="container mx-auto 2xl:px-44">
+          <h1 className='text-7xl'>{pageData?.title}</h1>
+          <h2 className='text-3xl'>{pageData?.description}</h2>
         </main>
       </div>
       <Footer logo={siteConfig.logo} />
