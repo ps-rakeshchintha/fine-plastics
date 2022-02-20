@@ -7,7 +7,8 @@ import HeaderMenu, { MenuItem } from './HeaderMenu'
 import Logo from '../Logo'
 
 export interface HeaderProps {
-  menuItems: MenuItem[]
+  menuItems: MenuItem[];
+  logo: any
 }
 
 const CTA = () => {
@@ -23,7 +24,7 @@ const CTA = () => {
   )
 }
 
-const Header = ({ menuItems }: HeaderProps) => {
+const Header = ({ menuItems, logo }: HeaderProps) => {
   const [showMenu, setShowMenu] = useState(false)
   const toggleMenu = () => {
     setShowMenu(!showMenu)
@@ -44,7 +45,7 @@ const Header = ({ menuItems }: HeaderProps) => {
           <div className="flex-1 p-4 text-center lg:flex-initial lg:text-left">
             <Link href="/">
               <a className="inline-block">
-                <Logo />
+                <Logo logo={logo} />
                 <span className="sr-only">Home</span>
               </a>
             </Link>

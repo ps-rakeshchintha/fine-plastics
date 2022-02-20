@@ -36,7 +36,6 @@ export async function getStaticPaths() {
   const paths = routes.map((route) => ({
     params: { slug: route.slug === "/" ? false : [route.slug] },
   }))
-  console.log(paths)
 
   // We'll pre-render only these paths at build time.
   // { fallback: false } means other routes should 404.
@@ -55,19 +54,15 @@ export const getStaticProps: GetStaticProps = async (_context) => {
 const Home: NextPage = ({ siteConfig }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
-      <Header menuItems={siteConfig.mainNavigation} />
+      <Header menuItems={siteConfig.mainNavigation} logo={siteConfig.logo} />
       <div className="flex min-h-screen flex-col items-center justify-center py-2">
         <Head>
           <title>{siteConfig.title}</title>
         </Head>
         <main className="container mx-auto 2xl:px-44">
-          {JSON.stringify(siteConfig)}
-          <div className="w-[79px h-[87px]">
-            <Image src={urlFor(siteConfig.logo).width(79).height(87).url()} alt={siteConfig.logo.alt} width={79} height={87} />
-          </div>
         </main>
       </div>
-      <Footer />
+      <Footer logo={siteConfig.logo} />
     </>
   )
 }

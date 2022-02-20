@@ -3,7 +3,7 @@ import Button from './Button'
 import Icon, { IconData, IconName } from './Icon'
 import Logo from './Logo'
 
-interface footerColumn {
+interface FooterColumn {
   category: string
   links?: {
     name: string
@@ -17,8 +17,12 @@ interface footerColumn {
   }
 }
 
-const Footer = () => {
-  const footerColumns: footerColumn[] = [
+interface FooterProps {
+  logo: any;
+}
+
+const Footer = ({ logo }: FooterProps) => {
+  const footerColumns: FooterColumn[] = [
     {
       category: 'PROJECTS',
       links: [
@@ -66,7 +70,7 @@ const Footer = () => {
     <footer className="container mx-auto divide-y py-12 px-4 ">
       <div className="flex flex-col pb-10 lg:flex-row">
         <div className="flex-1 mt-10">
-          <Logo />
+          <Logo logo={logo} />
         </div>
         <div className="mt-10 grid grid-cols-2 gap-10 md:grid-cols-4">
           {footerColumns.map((footerColumn, index) => (
