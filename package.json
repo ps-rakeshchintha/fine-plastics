@@ -8,9 +8,12 @@
     "start": "next start",
     "build:web": "next build",
     "build:sanity": "cd studio && sanity build ../public/studio -y && cd ..",
-    "postinstall": "lerna bootstrap"
+    "postinstall": "lerna bootstrap",
+    "format": "onchange \"**/*\" -- prettier --write --ignore-unknown {{changed}}"
   },
   "dependencies": {
+    "@headlessui/react": "^1.5.0",
+    "@heroicons/react": "^1.0.5",
     "@portabletext/react": "^1.0.3",
     "@sanity/image-url": "^1.0.1",
     "next": "latest",

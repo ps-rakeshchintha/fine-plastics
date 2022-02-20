@@ -1,5 +1,9 @@
 // lib/sanity.js
-import { createPreviewSubscriptionHook, createCurrentUserHook, createClient } from 'next-sanity'
+import {
+  createPreviewSubscriptionHook,
+  createCurrentUserHook,
+  createClient,
+} from 'next-sanity'
 import createImageUrlBuilder from '@sanity/image-url'
 import { config } from './config'
 import { SanityImageSource } from '@sanity/image-url/lib/types/types'
@@ -8,7 +12,8 @@ import { SanityImageSource } from '@sanity/image-url/lib/types/types'
  * Set up a helper function for generating Image URLs with only the asset reference data in your documents.
  * Read more: https://www.sanity.io/docs/image-url
  **/
-export const urlFor = (source: SanityImageSource) => createImageUrlBuilder(config).image(source)
+export const urlFor = (source: SanityImageSource) =>
+  createImageUrlBuilder(config).image(source)
 
 // Set up the live preview subscription hook
 export const usePreviewSubscription = createPreviewSubscriptionHook(config)
@@ -21,10 +26,11 @@ export const sanityClient = createClient(config)
 
 // Set up a preview client with serverless authentication for drafts
 export const previewClient = createClient({
-    ...config,
-    useCdn: false,
-    token: process.env.SANITY_API_TOKEN,
+  ...config,
+  useCdn: false,
+  token: process.env.SANITY_API_TOKEN,
 })
 
 // Helper function for easily switching between normal client and preview client
-export const getClient = (usePreview?: boolean) => (usePreview ? previewClient : sanityClient)
+export const getClient = (usePreview?: boolean) =>
+  usePreview ? previewClient : sanityClient

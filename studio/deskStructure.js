@@ -7,6 +7,4 @@ const hiddenDocTypes = (listItem) => !['site-config'].includes(listItem.getId())
 export default () =>
   S.list()
     .title('Site')
-    .items([
-      ...S.documentTypeListItems().filter(hiddenDocTypes),
-    ])
+    .items([...S.documentTypeListItems().filter(hiddenDocTypes)])

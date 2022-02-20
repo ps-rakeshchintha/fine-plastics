@@ -1,17 +1,17 @@
 import type { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next'
-import { groq } from 'next-sanity';
-import Head from 'next/head';
-import Image from 'next/image';
-import { getClient, urlFor } from '../lib/sanity';
-
+import { groq } from 'next-sanity'
+import Head from 'next/head'
+import Image from 'next/image'
+import Footer from '../components/Footer'
+import Header from '../components/Header'
+import { getClient, urlFor } from '../lib/sanity'
 
 const postQuery = groq`
   *[_type == "site-config"][0] {
-    ...,
-    logo,
+    logo ,
     mainNavigation[] -> {
-      ...,
-      "title": page->title
+      "name": page->title,
+      "link": slug.current
     },
     footerNavigation[] -> {
       ...,
@@ -29,21 +29,30 @@ export const getStaticProps: GetStaticProps = async (context) => {
   }
 }
 
-const Home: NextPage = ({ siteConfig }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Home: NextPage = ({
+  siteConfig,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
-      <Head>
-        <title>{siteConfig.title}</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <div>
-        <div className='h-[87px] w-[79px'>
-          <Image src={urlFor(siteConfig.logo).width(79).height(87).url()} alt={siteConfig.logo.alt} width={79} height={87} />
-        </div>
-
-        {JSON.stringify(siteConfig)}
+    <>
+      <Header />
+      <div className="flex min-h-screen flex-col items-center justify-center py-2">
+        <Head>
+          <title>{siteConfig.title}</title>
+        </Head>
+        <main className="container mx-auto 2xl:px-44">
+          {JSON.stringify(siteConfig)}
+          <div className="w-[79px h-[87px]">
+            <Image
+              src={urlFor(siteConfig.logo).width(79).height(87).url()}
+              alt={siteConfig.logo.alt}
+              width={79}
+              height={87}
+            />
+          </div>
+        </main>
       </div>
-    </div>
+      <Footer />
+    </>
   )
 }
 
