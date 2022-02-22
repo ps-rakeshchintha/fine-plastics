@@ -8,6 +8,7 @@ import { getClient, urlFor } from '../lib/sanity'
 
 const siteConfigQuery = groq`
   *[_type == "site-config"][0] {
+    ...,
     logo ,
     mainNavigation[] -> {
       "name": page->title,
@@ -67,17 +68,18 @@ export const getStaticProps: GetStaticProps = async (context) => {
 const Home: NextPage = ({ siteConfig, pageData }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
-      <Header menuItems={siteConfig.mainNavigation} logo={siteConfig.logo} />
+      <Header siteConfig={siteConfig} />
       <div className="flex min-h-screen flex-col items-center justify-center py-2">
         <Head>
-          <title>{siteConfig.title}</title>
+          <title>{pageData?.title}</title>
         </Head>
+        {JSON.stringify(siteConfig)}
         <main className="container mx-auto 2xl:px-44">
           <h1 className='text-7xl'>{pageData?.title}</h1>
           <h2 className='text-3xl'>{pageData?.description}</h2>
         </main>
       </div>
-      <Footer logo={siteConfig.logo} />
+      <Footer siteConfig={siteConfig.logo} />
     </>
   )
 }

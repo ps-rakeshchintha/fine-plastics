@@ -23,9 +23,9 @@ const Menu = ({ menuItems, isSubMenu }: MenuProps) => {
           {menuItem.link ? (
             <Link href={menuItem.link as string}>
               <a
-                className={`group flex h-14  w-full items-center font-semibold active:text-pink-500 
+                className={`group flex h-14  w-full items-center active:text-primary-600 
                                 ${index === menuItems.length - 1 && !isSubMenu ? 'border-b-0' : 'border-b-[1px]'} 
-                                lg:flex lg:h-full lg:flex-row lg:items-start lg:border-b-0 lg:py-6 lg:px-4 lg:text-slate-600 lg:hover:text-slate-400`}
+                                lg:flex lg:h-full lg:flex-row lg:items-start lg:border-b-0 lg:py-6 lg:px-4 text-secondary-700 hover:text-secondary-600`}
               >
                 {!isSubMenu && menuItem.name}
                 {isSubMenu && (
@@ -33,14 +33,14 @@ const Menu = ({ menuItems, isSubMenu }: MenuProps) => {
                     <span className="lg:hidden">{menuItem.name}</span>
                     {menuItem.icon ? (
                       <span className="hidden lg:block">
-                        <Icon icon={menuItem.icon.url as IconName} className="mr-4 h-10 w-10 text-pink-500" />
+                        <Icon icon={menuItem.icon.url as IconName} className="mr-4 h-10 w-10 text-primary-600" />
                       </span>
                     ) : (
                       ''
                     )}
                     <span className="hidden lg:block">
-                      <span className="text-slate-700 group-hover:text-pink-500">{menuItem.name}</span>
-                      <span className="hidden text-slate-500 group-hover:text-slate-500 lg:block">{menuItem.description}</span>
+                      <span className="text-secondary-700 group-hover:text-primary-600">{menuItem.name}</span>
+                      <span className="hidden text-secondary-500 group-hover:text-secondary-500 lg:block">{menuItem.description}</span>
                     </span>
                   </>
                 )}
@@ -50,7 +50,7 @@ const Menu = ({ menuItems, isSubMenu }: MenuProps) => {
             <Disclosure>
               {({ open }) => (
                 <>
-                  <Disclosure.Button className="lg:py:5 flex h-14 w-full items-center justify-between border-b-[1px] font-semibold active:text-pink-500 lg:h-full lg:border-0 lg:py-6 lg:px-4 lg:text-slate-600  lg:hover:text-slate-400">
+                  <Disclosure.Button className="lg:py:5 flex h-14 w-full items-center justify-between border-b-[1px] font-semibold active:text-primary-600 lg:h-full lg:border-0 lg:py-6 lg:px-4 lg:text-secondary-700  lg:hover:text-secondary-600">
                     <span>{menuItem.name}</span>
                     <ChevronUpIcon className={`transition-transform ${open ? 'rotate-180 transform' : ''} mr-2 h-6 w-6 `} />
                   </Disclosure.Button>

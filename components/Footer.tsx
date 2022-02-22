@@ -18,10 +18,11 @@ interface FooterColumn {
 }
 
 interface FooterProps {
-  logo: any;
+  siteConfig: any;
 }
 
-const Footer = ({ logo }: FooterProps) => {
+const Footer = ({ siteConfig }: FooterProps) => {
+  const { logo } = siteConfig;
   const footerColumns: FooterColumn[] = [
     {
       category: 'PROJECTS',
@@ -75,7 +76,7 @@ const Footer = ({ logo }: FooterProps) => {
         <div className="mt-10 grid grid-cols-2 gap-10 md:grid-cols-4">
           {footerColumns.map((footerColumn, index) => (
             <div key={index} className={`${footerColumn.links ? 'col-span-1' : 'col-span-2'}`}>
-              <h3 className="mb-4 font-semibold text-slate-600">{footerColumn.category}</h3>
+              <h3 className="mb-4 font-semibold text-secondary-700">{footerColumn.category}</h3>
               {footerColumn.links && (
                 <ul>
                   {footerColumn.links.map((link, linkIndex) => (

@@ -16,8 +16,8 @@ const Button = (props: ButtonProps) => {
   const type = props.type || 'solid'
   const disabled = props.disabled || false
   const size = props.size || 'default'
-  const onClick = props.onClick || function () {}
-  let classNames = `${props.className || ''} rounded font-semibold px-4`
+  const onClick = props.onClick || function () { }
+  let classNames = `${props.className || ''} rounded px-4`
   switch (size) {
     case 'small':
       classNames = classNames + ' h-8'
@@ -33,7 +33,7 @@ const Button = (props: ButtonProps) => {
   }
   switch (variant) {
     case 'primary':
-      classNames = classNames + ' bg-pink-500 text-white hover:bg-pink-600 active:bg-pink-700'
+      classNames = classNames + ' bg-primary-600 text-white hover:bg-primary-700 active:bg-primary-800'
       break
 
     case 'light':

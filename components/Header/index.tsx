@@ -7,8 +7,7 @@ import HeaderMenu, { MenuItem } from './HeaderMenu'
 import Logo from '../Logo'
 
 export interface HeaderProps {
-  menuItems: MenuItem[];
-  logo: any
+  siteConfig: any;
 }
 
 const CTA = () => {
@@ -24,8 +23,9 @@ const CTA = () => {
   )
 }
 
-const Header = ({ menuItems, logo }: HeaderProps) => {
+const Header = ({ siteConfig }: HeaderProps) => {
   const [showMenu, setShowMenu] = useState(false)
+  const { mainNavigation, title, logo } = siteConfig
   const toggleMenu = () => {
     setShowMenu(!showMenu)
   }
@@ -36,22 +36,21 @@ const Header = ({ menuItems, logo }: HeaderProps) => {
           <div className="absolute left-2 top-2 lg:hidden">
             <button className="group m-4" onClick={toggleMenu}>
               <span className="flex h-6 w-6 flex-col place-items-center items-center justify-around py-1">
-                <span className={`inline-block h-[2px] w-5 bg-slate-400 transition-transform group-active:bg-pink-500 ${showMenu ? 'translate-y-1 rotate-45' : 'rotate-0'}`}></span>
-                <span className={`inline-block h-[2px] w-5 bg-slate-400 transition-transform group-active:bg-pink-500 ${showMenu ? '-translate-y-1 -rotate-45' : 'rotate-0'}`}></span>
+                <span className={`inline-block h-[2px] w-5 bg-secondary-400 transition-transform group-active:bg-primary-600 ${showMenu ? 'translate-y-1 rotate-45' : 'rotate-0'}`}></span>
+                <span className={`inline-block h-[2px] w-5 bg-secondary-400 transition-transform group-active:bg-primary-600 ${showMenu ? '-translate-y-1 -rotate-45' : 'rotate-0'}`}></span>
               </span>
               <span className="sr-only">Toggle Menu</span>
             </button>
           </div>
           <div className="flex-1 p-4 text-center lg:flex-initial lg:text-left">
             <Link href="/">
-              <a className="inline-block">
+              <a title={title} className="inline-block">
                 <Logo logo={logo} />
-                <span className="sr-only">Home</span>
               </a>
             </Link>
           </div>
           <div className="hidden lg:block">
-            <HeaderMenu menuItems={menuItems} />
+            <HeaderMenu menuItems={mainNavigation} />
           </div>
           <div className="hidden gap-x-4 md:flex">
             <CTA />
@@ -67,7 +66,7 @@ const Header = ({ menuItems, logo }: HeaderProps) => {
           leaveTo="opacity-0"
           className="absolute left-0 w-full bg-white bg-opacity-95 py-6 px-4 drop-shadow backdrop-blur"
         >
-          <HeaderMenu menuItems={menuItems} />
+          <HeaderMenu menuItems={mainNavigation} />
           <div className="grid gap-3 md:hidden">
             <CTA />
           </div>
